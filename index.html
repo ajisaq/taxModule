@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tax Module</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready( function () {
+                $('.table_id').DataTable();
+            } );
+        </script>
+        <style>
+
+
+            #tab {
+                margin: 0%;
+                border: 10% solid black;
+                background-color: antiquewhite;
+                height: 100%
+            }
+            #tab a:hover{
+                background-color: aliceblue;
+            }
+            #tab a {
+                color: black;
+            }
+
+        </style>
+    </head>
+    <body>
+        
+        <div class="container-fluid">
+            <div class="row">
+                    <div class="col-sm-12" id="head">
+                           <h1>Tax Module Prototype </h1>
+                    </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3">
+                    <div class="nav flex-column nav-pills" id="tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="location-tab" data-toggle="pill" href="#location" role="tab" aria-controls="location" aria-selected="true">Locations</a>
+                        <a class="nav-link" id="supervisor-tab" data-toggle="pill" href="#supervisor" role="tab" aria-controls="supervisor" aria-selected="false">Supervisors</a>
+                        <a class="nav-link" id="business-type-tab" data-toggle="pill" href="#business-type" role="tab" aria-controls="business-type" aria-selected="false">Business Categories</a>
+                        <a class="nav-link" id="admin-tab" data-toggle="pill" href="#admin" role="tab" aria-controls="admin" aria-selected="false">Administrators</a>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="tab-content" id="tabContent">
+                    <div class="tab-pane fade show active" id="location" role="tabpanel" aria-labelledby="location-tab">
+                        <h1>Locations</h1>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLocation">Add Location</button>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-primary active">
+                                  <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                                </label>
+                                <label class="btn btn-primary">
+                                  <input type="radio" name="options" id="option2" autocomplete="off"> Inactive
+                                </label>
+                        </div>
+                        <br />        
+                        <br />                  
+                        <table class="table_id" class="display">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>LOC 1</td>
+                                    <td>Location 1</td>
+                                    <td>
+                                        <a class="fas fa-pen" href="" data-toggle="modal" data-target="#updateLocation"></a>
+                                        <a class="fas fa-times" href="" title="click to delete location"></a>
+                                        <a class="fas fa-minus" href="" title="click to disable location"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>LOC 2</td>
+                                    <td>Location 2</td>
+                                    <td>
+                                            <a class="fas fa-pen" href=""></a>
+                                            <a class="fas fa-times" href=""></a>
+                                            <a class="fas fa-minus" href=""></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>LOC 3</td>
+                                    <td>Location 3</td>
+                                    <td>
+                                            <a class="fas fa-pen" href=""></a>
+                                            <a class="fas fa-times" href=""></a>
+                                            <a class="fas fa-minus" href=""></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>LOC 4</td>
+                                    <td>Location 4</td>
+                                    <td>
+                                            <a class="fas fa-pen" href=""></a>
+                                            <a class="fas fa-times" href=""></a>
+                                            <a class="fas fa-minus" href=""></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> 
+
+                         <!-- add location modal-->                     
+                        <div class="modal fade" id="addLocation" tabindex="-1" role="dialog" aria-labelledby="addLocationLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addLocationLabel">Add New Location</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Code</label>
+                                        <input type="text" class="form-control" id="code">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message-text" class="col-form-label">Name</label>
+                                        <input type="text" class="form-control" id="name">
+                                    </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">Add Location</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- UPdate location modal-->
+                        <div class="modal fade" id="updateLocation" tabindex="-1" role="dialog" aria-labelledby="updateLocationLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="updateLocationLabel">Update Location</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Code</label>
+                                            <input type="text" class="form-control" id="code">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Name</label>
+                                            <input type="text" class="form-control" id="name">
+                                        </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Update Location</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                              
+
+                    </div>
+                    <div class="tab-pane fade " id="supervisor" role="tabpanel" aria-labelledby="supervisor-tab">
+                            <h1>Supervisors</h1>
+                            
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSupervisor">Add Supervisor</button>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-primary active">
+                                      <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                                    </label>
+                                    <label class="btn btn-primary">
+                                      <input type="radio" name="options" id="option2" autocomplete="off"> Inactive
+                                    </label>
+                            </div>
+                            <br />        
+                            <br />                  
+                            <table class="table_id" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>SN</th>
+                                        <th>Employee ID</th>
+                                        <th>Name</th>
+                                        <th>Contact</th>
+                                        <th>Location</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Emp 1</td>
+                                        <td>Musa Manda</td>
+                                        <td>08080808008</td>
+                                        <td>Location 1</td>
+                                        <td>
+                                            <a class="fas fa-pen" href="" data-toggle="modal" data-target="#updateSupervisor"></a>
+                                            <a class="fas fa-times" href="" title="click to delete location"></a>
+                                            <a class="fas fa-minus" href="" title="click to disable location"></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                            <td>2</td>
+                                            <td>Emp 2</td>
+                                            <td>John Habari</td>
+                                            <td>08080808009</td>
+                                            <td>Location 2</td>
+                                            <td>
+                                                <a class="fas fa-pen" href="" data-toggle="modal" data-target="#updateSupervisor"></a>
+                                                <a class="fas fa-times" href="" title="click to delete location"></a>
+                                                <a class="fas fa-minus" href="" title="click to disable location"></a>
+                                            </td>
+                                    </tr>
+                                    <tr>
+                                            <td>3</td>
+                                            <td>Emp 3</td>
+                                            <td>Aisha Mahmud</td>
+                                            <td>08080808007</td>
+                                            <td>Location 3</td>
+                                            <td>
+                                                <a class="fas fa-pen" href="" data-toggle="modal" data-target="#updateSupervisor"></a>
+                                                <a class="fas fa-times" href="" title="click to delete location"></a>
+                                                <a class="fas fa-minus" href="" title="click to disable location"></a>
+                                            </td>
+                                    </tr>
+                                </tbody>
+                            </table> 
+    
+                             <!-- add supervisor modal-->                     
+                            <div class="modal fade" id="addSupervisor" tabindex="-1" role="dialog" aria-labelledby="addSupervisorLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addSupervisorLabel">Add New Supervisor</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Employee ID</label>
+                                            <input type="text" class="form-control" id="empId">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Name</label>
+                                            <input type="text" class="form-control" id="name">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="message-text" class="col-form-label">Contact</label>
+                                                <input type="text" class="form-control" id="contact">
+                                        </div>  
+                                        <div class="form-group">
+                                                <label for="message-text" class="col-form-label">Location</label>
+                                                <select class="form-control" id="location">
+                                                    <option>--Select Location--</option>
+                                                    <option>Location 1</option>
+                                                    <option>Location 2</option>
+                                                    <option>Location 3</option>
+                                                </select>
+                                        </div> 
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Add Supervisor</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <!-- UPdate supervisor modal-->
+                            <div class="modal fade" id="updateSupervisor" tabindex="-1" role="dialog" aria-labelledby="updateSupervisorLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="updateSupervisorLabel">Update Supervisor</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                                <form>
+                                                <div class="form-group">
+                                                    <label for="recipient-name" class="col-form-label">Employee ID</label>
+                                                    <input type="text" class="form-control" id="empId">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="message-text" class="col-form-label">Name</label>
+                                                    <input type="text" class="form-control" id="name">
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">Contact</label>
+                                                        <input type="text" class="form-control" id="contact">
+                                                </div>  
+                                                <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">Location</label>
+                                                        <select class="form-control" id="location">
+                                                            <option>--Select Location--</option>
+                                                            <option>Location 1</option>
+                                                            <option>Location 2</option>
+                                                            <option>Location 3</option>
+                                                        </select>
+                                                </div> 
+                                                </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary">Update Supervisor</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                  
+    
+                    </div>
+                    <div class="tab-pane fade" id="business-type" role="tabpanel" aria-labelledby="business-type-tab">
+                        <h1>Business Category</h1>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBusCat">Add Business Category</button>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-primary active">
+                                  <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                                </label>
+                                <label class="btn btn-primary">
+                                  <input type="radio" name="options" id="option2" autocomplete="off"> Inactive
+                                </label>
+                        </div>
+                        <br />        
+                        <br />                  
+                        <table class="table_id" class="display">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Location/th>
+                                    <th>Business Category</th>                                
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>                     
+                                    <td>Location 1</td>
+                                    <td>Business Category 1</td>
+                                    <td>
+                                            <a class="fas fa-pen" href="" data-toggle="modal" data-target="#updateBusCat"></a>
+                                            <a class="fas fa-times" href="" title="click to delete Business Category"></a>
+                                            <a class="fas fa-minus" href="" title="click to disable Business Category"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                
+                                    <td>Location 2</td>
+                                    <td>Business Category 2</td>
+                                    <td>
+                                            <a class="fas fa-pen" href="" data-toggle="modal" data-target="#updateBusCat"></a>
+                                            <a class="fas fa-times" href="" title="click to delete Business Category"></a>
+                                            <a class="fas fa-minus" href="" title="click to disable Business Category"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td>3</td>
+                                        <td>Location 3</td>
+                                        <td>Business Category 3</td>
+                                        <td>
+                                            <a class="fas fa-pen" href="" data-toggle="modal" data-target="#updateBusCat"></a>
+                                            <a class="fas fa-times" href="" title="click to delete Business Category"></a>
+                                            <a class="fas fa-minus" href="" title="click to disable Business Category"></a>
+                                        </td>
+                                </tr>
+                            </tbody>
+                        </table> 
+
+                         <!-- add Business Category modal-->                     
+                        <div class="modal fade" id="addBusCat" tabindex="-1" role="dialog" aria-labelledby="addBusCatLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addBusCatLabel">Add New Business Category</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                    <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Location</label>
+                                            <select class="form-control" id="location">
+                                                <option>--Select Location--</option>
+                                                <option>Location 1</option>
+                                                <option>Location 2</option>
+                                                <option>Location 3</option>
+                                            </select>
+                                    </div> 
+                                    <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Business Category/Type</label>
+                                            <input type="text" class="form-control" id="busCat">
+                                    </div>  
+
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">Add Business Category</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- UPdate Business Category modal-->
+                        <div class="modal fade" id="updateBusCat" tabindex="-1" role="dialog" aria-labelledby="updateBusCatLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="updateBusCatLabel">Update BusCat</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                            <form>
+                                            <div class="form-group">
+                                                    <label for="message-text" class="col-form-label">Location</label>
+                                                    <select class="form-control" id="location">
+                                                        <option>--Select Location--</option>
+                                                        <option>Location 1</option>
+                                                        <option>Location 2</option>
+                                                        <option>Location 3</option>
+                                                    </select>
+                                            </div> 
+                                            <div class="form-group">
+                                                    <label for="message-text" class="col-form-label">Business Category/Type</label>
+                                                    <input type="text" class="form-control" id="busCat">
+                                            </div>  
+        
+                                            </form>
+                                    </div>
+                                    
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Update Business Category</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                    </div>
+                    <div class="tab-pane fade" id="admin" role="tabpanel" aria-labelledby="admin-tab">
+                            <h1>Administrators</h1>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAdmin">Add Admin</button>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-primary active">
+                                      <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                                    </label>
+                                    <label class="btn btn-primary">
+                                      <input type="radio" name="options" id="option2" autocomplete="off"> Inactive
+                                    </label>
+                            </div>
+                            <br />        
+                            <br />                  
+                            <table class="table_id" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>SN</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Username</th>                            
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>                                
+                                        <td>Musa Manda</td>
+                                        <td>musa@gmail.com</td>
+                                        <td>admin1</td>
+                                        <td>
+                                            
+                                            <a class="fas fa-times" href="" title="click to delete Admin"></a>
+                                            <a class="fas fa-minus" href="" title="click to disable admin"></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>                                
+                                        <td>Ahmed Idi</td>
+                                        <td>musa@gmail.com</td>
+                                        <td>admin2</td>
+                                        <td>
+                                            
+                                            <a class="fas fa-times" href="" title="click to delete admin"></a>
+                                            <a class="fas fa-minus" href="" title="click to disable admin"></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>                                
+                                        <td>Daniel Hamman</td>
+                                        <td>musa@gmail.com</td>
+                                        <td>admin3</td>
+                                        <td>
+                                            
+                                            <a class="fas fa-times" href="" title="click to delete admin"></a>
+                                            <a class="fas fa-minus" href="" title="click to disable admin"></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table> 
+    
+                             <!-- add admin modal-->                     
+                            <div class="modal fade" id="addAdmin" tabindex="-1" role="dialog" aria-labelledby="addAdminLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addAdminLabel">Add New Admin</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Name</label>
+                                            <input type="text" class="form-control" id="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Email</label>
+                                            <input type="text" class="form-control" id="email">
+                                        </div>                                                                             
+                                        
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Add Admin</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </body>
+</html>
